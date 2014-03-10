@@ -16,6 +16,10 @@ abstract class IdTable[I <: BaseId, A <: WithId[I]](tag: Tag, schemaName: Option
                                                    (implicit val mapping: BaseColumnType[I])
   extends BaseTable[A](tag, schemaName, tableName) {
 
+
+
+
+
   /**
    * Auxiliary constructor without schema name.
    * @param tableName name of table

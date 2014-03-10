@@ -3,6 +3,17 @@ package org.virtuslab.unicorn.ids
 import play.api.data.format.{ Formats, Formatter }
 import play.api.mvc.{ QueryStringBindable, PathBindable }
 
+/** Marker trait */
+protected[unicorn] trait Applicable[I <: BaseId] {
+
+  /**
+   * Factory method for I instance creation.
+   * @param id long from which I instance is created
+   * @return I instance
+   */
+  def apply(id: Long): I
+}
+
 
 /**
  * Base class for companion objects for id classes.

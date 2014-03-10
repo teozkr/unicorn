@@ -1,9 +1,11 @@
 package org.virtuslab.unicorn.ids.repositories
 
 import org.virtuslab.unicorn.ids._
-import play.api.db.slick.Config.driver.simple._
+import org.virtuslab.unicorn.ids.PlayUnicorn._
 
 class UsersRepositoryTest extends AppTest {
+
+  import PlayUnicorn.driver.simple._
 
   case class UserId(id: Long) extends BaseId
 

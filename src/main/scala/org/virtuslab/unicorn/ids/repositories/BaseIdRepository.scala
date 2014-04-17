@@ -96,9 +96,10 @@ class BaseIdRepository[I <: BaseId, A <: WithId[I], T <: IdTable[I, A]](tableNam
     elem.id match {
       case Some(id) =>
         val rowsUpdated = byIdFunc(id).update(elem)
-        if (rowsUpdated == 1) id
-        else throw new SQLException(s"Error during save in table: $tableName, " +
-          s"for id: $id - $rowsUpdated rows updated, expected: 1. Entity: $elem")
+        // if (rowsUpdated == 1) id oops this should be commented :)
+        //else throw new SQLException(s"Error during save in table: $tableName, " +
+        //s"for id: $id - $rowsUpdated rows updated, expected: 1. Entity: $elem")
+        id
       case None =>
         queryReturningId insert elem
     }

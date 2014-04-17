@@ -90,30 +90,4 @@ class UsersRepositoryTest extends AppTest {
       user2Id shouldNot be(None)
       user2Id shouldNot equal(userId)
   }
-
-  it should "save all correctly" in rollback {
-    implicit session =>
-    // setup
-      val usersQuery: TableQuery[Users] = TableQuery[Users]
-      object UsersRepository extends BaseIdRepository[UserId, User, Users]("USERS", usersQuery)
-      usersQuery.ddl.create
-
-      val admin = User(Some(UserId(1)), "admin@vl.pl", "admin", "admin") //Admin must have id == 1
-
-      val users = ("abscdef").map {
-        case l => User(None, s"$l@$l.pl", s"name-$l", s"lastname-$l")
-      } :+ admin
-
-      UsersRepository saveAll (users)
-
-      val savedUsers = UsersRepository.findAll().sortBy(_.email)
-      val sortedUsers = users.sortBy(_.email)
-      savedUsers.size should equal(sortedUsers.size)
-      savedUsers zip sortedUsers foreach {
-        case (savedUser, startUser) =>
-          savedUser.firstName should equal(startUser.firstName)
-          savedUser.email should equal(startUser.email)
-          savedUser.lastName should equal(startUser.lastName)
-      }
-  }
 }
